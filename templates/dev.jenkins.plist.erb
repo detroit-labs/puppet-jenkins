@@ -23,6 +23,12 @@
     <key>ProgramArguments</key>
     <array>
       <string>/usr/bin/java</string>
+      <%- if scope.lookupvar "jenkins::config::max_heap_size" -%>
+      <string>-Xmx<%= scope.lookupvar "jenkins::config::max_heap_size" %></string>
+      <%- end -%>
+      <%- if scope.lookupvar "jenkins::config::max_perm_size" -%>
+      <string>-XX:MaxPermSize=<%= scope.lookupvar "jenkins::config::max_perm_size" %></string>
+      <%- end -%>
       <string>-jar</string>
       <string><%= scope.lookupvar "jenkins::config::warfile" %></string>
       <string>--httpListenAddress=127.0.0.1</string>
